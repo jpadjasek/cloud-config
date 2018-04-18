@@ -1,0 +1,12 @@
+server:
+  port: 8888
+spring:
+  config:
+    name: configserver
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/jpadjasek/configs
