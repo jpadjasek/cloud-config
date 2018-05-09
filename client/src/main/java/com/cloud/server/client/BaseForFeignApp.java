@@ -1,29 +1,23 @@
 package com.cloud.server.client;
 
+import com.cloud.server.client.mode.TestDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @RefreshScope
 @EnableDiscoveryClient
-public class ClientApp {
-
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
+public class BaseForFeignApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(ClientApp.class, args);
+        SpringApplication.run(BaseForFeignApp.class, args);
     }
 }
 
@@ -31,7 +25,7 @@ public class ClientApp {
 @RestController
 class MessageRestController {
 
-    @Value("${remote.prop}")
+    //@Value("${remote.prop}")
     private String remote;
 
     //@Value("${local.name}")
@@ -39,11 +33,14 @@ class MessageRestController {
 
     @RequestMapping("/remote")
     String getRemonte() {
-        return this.remote;
+        return "DUPA";
     }
 
-    @RequestMapping("/local")
-    String getLocal() {
-        return this.local;
+    @RequestMapping("/post")
+
+    TestDto changePost(   @RequestBody TestDto testDto) {
+        testDto.setAge(22);
+        testDto.setName("new Name");
+        return testDto;
     }
 }
