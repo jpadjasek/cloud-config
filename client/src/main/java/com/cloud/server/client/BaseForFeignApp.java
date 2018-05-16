@@ -1,12 +1,10 @@
 package com.cloud.server.client;
 
 import com.cloud.server.client.mode.TestDto;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +30,7 @@ class MessageRestController {
     private String local;
 
     @RequestMapping("/remote")
-    String getRemonte() {
+    String getRemote() {
         return "DUPA";
     }
 
